@@ -1,0 +1,42 @@
+class Drafty.Entity extends Drafty.Object
+    constructor: ->
+        @components = []
+        @id = @createUID()
+        @resetChanged()
+
+    addComponent: (component) ->
+        if _.isString(component) and Drafty[component]
+            name = component
+            component = Drafty[component]
+
+        unless _.isFunction(component)
+            throw new Error "#{component} is not instantiable"
+        unless component.name or name
+            throw new Error "Cannot get name of component. Try adding .name property"
+        
+        name = @_lowerCaseFirst (name or component.name) # convert name, so it can be attached as property
+        @components.push name
+        @createFakeConstructor component, name
+        @[name]() if component.runAfterAttach
+
+        @[name]
+
+    _lowerCaseFirst: (str) ->
+        str.charAt(0).toLowerCase() + str.substr 1
+    
+    # create fake constructor for component. for example, user calls entity.comp(123)
+    createFakeConstructor: (component, name) ->
+        @[name] = ->
+            obj = new component(@, arguments...) # give the arguments to real constructor
+            @[name] = obj # rewrite this function to newly created object
+            obj # user can now call entity.comp.doSomething(123)
+    
+    has: (name) ->
+        name in @components
+    
+    createUID: ->
+        _.uniqueId 'entity_'
+    
+    resetChanged: ->
+        @changed = []
+
