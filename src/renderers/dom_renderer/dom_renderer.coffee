@@ -1,6 +1,6 @@
 class Drafty.DomRenderer extends Drafty.Renderer
     constructor: (@game, @timer) ->
-        @createWrapper()
+        @wrapper = new Drafty.DomRenderer.Wrapper @, @game.width, @game.height
 
         @timer ||= new Drafty.AnimationTimer
         @timer.start()
@@ -9,33 +9,13 @@ class Drafty.DomRenderer extends Drafty.Renderer
         @nodes = {}
 
         @bind()
-
-    createWrapper: ->
-        body = document.body
-        wrapper = @createDiv()
-        _(wrapper.style).extend
-            width: "#{@game.width}px"
-            height: "#{@game.height}px"
-            overflow: 'hidden'
-            position: 'relative'
-        
-        if body
-            body.appendChild wrapper
-        else
-            bind = window.addEventListener ||
-                   window.attachEvent
-            bind 'load', ->
-                document.body.appendChild wrapper
-            , false
-
-        @wrapper = wrapper
     
     bind: ->
-        @timer.bind 'tick', _(@draw).bind @
+        @timer.bind 'tick', _(@render).bind @
         @game.bind 'createEntity', _(@create).bind @
         @game.bind 'removeEntity', _(@remove).bind @
     
-    draw: ->
+    render: ->
         _(@entities).each (entity) ->
             @update entity if entity.changed.length
         , @
@@ -47,7 +27,8 @@ class Drafty.DomRenderer extends Drafty.Renderer
         entity.resetChanged()
         
     create: (entity) ->
-        div = @createDiv entity.id
+        div = document.createElement 'div'
+        div.id = entity.id
         _(div.style).extend
             position: 'absolute'
             left: entity.twoD.x + "px"
@@ -58,15 +39,8 @@ class Drafty.DomRenderer extends Drafty.Renderer
 
         @entities[entity.id] = entity
         @nodes[entity.id] = div
-        @appendDiv div
+
+        @wrapper.addEntity div
 
     remove: (entity) ->
         console.info "Removing entity #{entity.id}"
-    
-    createDiv: (id) ->
-        div = document.createElement 'div'
-        div.id = id if id
-        div
-    
-    appendDiv: (div) ->
-        @wrapper.appendChild div
