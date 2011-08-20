@@ -25,5 +25,6 @@ class Drafty.DomRenderer.Wrapper extends Drafty.Object
             bind 'load', _(append).bind(@), false
     
     addEntity: (entity) ->
-        @element.appendChild entity
+        @entities.push entity
+        @element.appendChild entity.element
         

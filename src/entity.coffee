@@ -37,6 +37,9 @@ class Drafty.Entity extends Drafty.Object
     createUID: ->
         _.uniqueId 'entity_'
     
+    hasChanged: ->
+        @changed.length > 0
+    
     resetChanged: ->
         @changed = []
 

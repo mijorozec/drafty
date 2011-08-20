@@ -17,30 +17,24 @@ class Drafty.DomRenderer extends Drafty.Renderer
     
     render: ->
         _(@entities).each (entity) ->
-            @update entity if entity.changed.length
+            @update entity if entity.hasChanged()
         , @
     
     update: (entity) ->
-        # node = @entities[entity.id]
-        console.info "Updating entity #{entity.id}:"
-        console.dir entity
+        console.info "Updating entity #{entity.id}"
+
+        @nodes[entity.id].update()
         entity.resetChanged()
         
     create: (entity) ->
-        div = document.createElement 'div'
-        div.id = entity.id
-        _(div.style).extend
-            position: 'absolute'
-            left: entity.twoD.x + "px"
-            top: entity.twoD.y + "px"
-            width: entity.twoD.w + "px"
-            height: entity.twoD.h + "px"
-            backgroundColor: '#000'
+        console.info "Creating entity #{entity.id}"
+
+        node = new Drafty.DomRenderer.Entity entity
 
         @entities[entity.id] = entity
-        @nodes[entity.id] = div
+        @nodes[entity.id] = node
 
-        @wrapper.addEntity div
+        @wrapper.addEntity node
 
     remove: (entity) ->
         console.info "Removing entity #{entity.id}"
