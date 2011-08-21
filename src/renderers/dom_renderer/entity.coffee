@@ -3,11 +3,22 @@ class Drafty.DomRenderer.Entity extends Drafty.Object
         @element = document.createElement 'div'
         @element.id = entity.id
 
-        @setupStyles()
-    
-    setupStyles: ->
-        _(@element.style).extend
-            position: 'absolute'
+        @set 'position', 'absolute'
     
     update: ->
-        console.log @entity.changed
+        _(@entity.changed).each (change) ->
+            if change.component instanceof Drafty.TwoD
+                name = switch change.what
+                           when 'x' then 'top'
+                           when 'y' then 'left'
+                           when 'w' then 'width'
+                           when 'h' then 'height'
+                
+            @set name, change.value if name
+        , @
+    
+    set: (name, value) ->
+        if name in ['width', 'height', 'top', 'left']
+            @element.style[name] = value + "px"
+        
+        @element.style[name] = value

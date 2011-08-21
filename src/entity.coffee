@@ -41,7 +41,7 @@ class Drafty.Entity extends Drafty.Object
     
     componentChange: (component, what, value) ->
         @changed.push
-            compoment: component
+            component: component
             what: what
             value: value
     
