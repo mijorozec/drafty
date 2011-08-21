@@ -1,5 +1,5 @@
 class Drafty.DomRenderer.Wrapper extends Drafty.Object
-    constructor: (@game, @width, @height) ->
+    constructor: (@renderer, @width, @height) ->
         @element = document.createElement 'div'
         @element.id = 'drafty'
         @setStyles()
@@ -9,8 +9,8 @@ class Drafty.DomRenderer.Wrapper extends Drafty.Object
     
     setStyles: ->
         _(@element.style).extend
-            width: "#{@game.width}px"
-            height: "#{@game.height}px"
+            width: @width + "px"
+            height: @height + "px"
             overflow: 'hidden'
             position: 'relative'
     

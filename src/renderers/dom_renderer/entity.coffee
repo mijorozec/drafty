@@ -13,6 +13,8 @@ class Drafty.DomRenderer.Entity extends Drafty.Object
                            when 'y' then 'left'
                            when 'w' then 'width'
                            when 'h' then 'height'
+            if change.component instanceof Drafty.Background
+                name = 'backgroundColor'
                 
             @set name, change.value if name
         , @
@@ -20,5 +22,5 @@ class Drafty.DomRenderer.Entity extends Drafty.Object
     set: (name, value) ->
         if name in ['width', 'height', 'top', 'left']
             @element.style[name] = value + "px"
-        
-        @element.style[name] = value
+        else
+            @element.style[name] = value
