@@ -4,6 +4,8 @@ class Drafty.Entity extends Drafty.Object
         @id = @createUID()
         @resetChanged()
 
+        @bind 'componentChange', _(@componentChange).bind @
+
     addComponent: (component) ->
         if _.isString(component) and Drafty[component]
             name = component
@@ -36,6 +38,12 @@ class Drafty.Entity extends Drafty.Object
     
     createUID: ->
         _.uniqueId 'entity_'
+    
+    componentChange: (component, what, value) ->
+        @changed.push
+            compoment: component
+            what: what
+            value: value
     
     hasChanged: ->
         @changed.length > 0
