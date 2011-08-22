@@ -7,7 +7,7 @@ class Drafty.DomRenderer.Entity extends Drafty.Object
     
     update: ->
         _(@entity.changed).each (change) ->
-            if change.component instanceof Drafty.TwoD
+            if change.component instanceof Drafty["2D"]
                 name = switch change.what
                            when 'x' then 'left'
                            when 'y' then 'top'
