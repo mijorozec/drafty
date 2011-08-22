@@ -7,3 +7,7 @@ _.mixin
             object.addEventListener event, fn, false
         else if window.attachEvent
             object.attachEvent event, fn
+    
+    remove: (array, value) ->
+        index = _(array).indexOf value
+        array.splice index, 1 if index > -1
