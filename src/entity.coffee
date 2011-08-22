@@ -16,15 +16,12 @@ class Drafty.Entity extends Drafty.Object
         unless component.name or name
             throw new Error "Cannot get name of component. Try adding .name property"
         
-        name = @_lowerCaseFirst (name or component.name) # convert name, so it can be attached as property
+        name = _.lowerCaseFirst(name or component.name) # convert name, so it can be attached as property
         @components.push name
         @createFakeConstructor component, name
         @[name]() if component.runAfterAttach
 
         @[name]
-
-    _lowerCaseFirst: (str) ->
-        str.charAt(0).toLowerCase() + str.substr 1
     
     # create fake constructor for component. for example, user calls entity.comp(123)
     createFakeConstructor: (component, name) ->
