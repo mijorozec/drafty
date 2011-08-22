@@ -9,8 +9,8 @@ class Drafty.DomRenderer.Entity extends Drafty.Object
         _(@entity.changed).each (change) ->
             if change.component instanceof Drafty.TwoD
                 name = switch change.what
-                           when 'x' then 'top'
-                           when 'y' then 'left'
+                           when 'x' then 'left'
+                           when 'y' then 'top'
                            when 'w' then 'width'
                            when 'h' then 'height'
             if change.component instanceof Drafty.Background
