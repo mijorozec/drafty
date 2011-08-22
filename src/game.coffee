@@ -3,6 +3,8 @@ class Drafty.Game extends Drafty.Object
         @timer ||= new Drafty.FixedTimer
         @timer.start()
 
+        @keyboard = new Drafty.Keyboard
+
         @entities = []
     
     renderOn: (name) ->
