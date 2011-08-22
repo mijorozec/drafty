@@ -1,4 +1,4 @@
-class Drafty.TwoD extends Drafty.Component    
+class Drafty["2D"] extends Drafty.Component    
     moveTo: (@x, @y) ->
     moveBy: (x, y) ->
         @x += x
@@ -14,4 +14,4 @@ class Drafty.TwoD extends Drafty.Component
     @property 'w', default: 0
     @property 'h', default: 0
 
-Drafty.TwoD.runAfterAttach = yes
+Drafty["2D"].runAfterAttach = yes

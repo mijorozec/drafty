@@ -28,6 +28,6 @@ Drafty.Object.property = (name, options) ->
     if options.access & Drafty.READ then config.get = -> @['_' + name] ?= options.default
     if options.access & Drafty.WRITE then config.set = (value) ->
         @['_' + name] = value
-        @trigger 'change', name if options.trigger
+        @trigger 'change', name, value if options.trigger
     
     Object.defineProperty @prototype, name, config
