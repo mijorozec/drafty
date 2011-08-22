@@ -1,10 +1,10 @@
 class Drafty.FixedTimer extends Drafty.Timer
     # tps = ticks per second
-    constructor: (tickContext, @tps = 100) ->
-        super tickContext
-    
+    constructor: (@tps = 100) ->
+        super
+
     start: ->
-        @interval = window.setInterval _(@tick).bind(@), 1000 / @tps
+        @interval = window.setInterval @tick, 1000 / @tps
     
     stop: ->
         window.clearInterval @interval

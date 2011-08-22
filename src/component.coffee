@@ -1,8 +1,8 @@
 class Drafty.Component extends Drafty.Object
     constructor: (@entity) ->
-        @bind 'change', _(@changed).bind @
+        @bind 'change', @changed
 
-    changed: (what, value) ->
+    changed: (what, value) =>
         @entity.trigger 'componentChange', @, what, value
 
 Drafty.Component.runAfterAttach = no # set to true if you want to create

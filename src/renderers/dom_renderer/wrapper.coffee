@@ -15,14 +15,14 @@ class Drafty.DomRenderer.Wrapper extends Drafty.Object
             position: 'relative'
     
     appendToDOM: ->
-        append = ->
+        append = =>
             document.body.appendChild @element
 
         if document.body? then append()
         else
             bind = window.addEventListener ||
                    window.attachEvent
-            bind 'load', _(append).bind(@), false
+            bind 'load', append, false
     
     addEntity: (entity) ->
         @entities.push entity
