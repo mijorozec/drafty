@@ -14,10 +14,14 @@ test "rendering with dom", ->
 
 class DummyRenderer extends Drafty.Renderer
 
-test "rendering with own renderer", ->
+test "rendering with own instantiated renderer", ->
     renderer = new DummyRenderer
     @game.renderOn renderer
-    equal @game.renderer, renderer
+    deepEqual @game.renderer, renderer
+
+test "rendering with own renderer", ->
+    @game.renderOn DummyRenderer
+    deepEqual @game.renderer, new DummyRenderer
 
 test "adding entity", ->
     ok @game.entity []
