@@ -21,7 +21,7 @@ test "write only property", ->
     equal o.writeOnly, undefined, "property is still undefined"
 
 test "read & write property", ->
-    equal o.readWrite, undefined, "property is undefined"
+    equal o.readWrite, null, "property is null"
     o.readWrite = 'foo'
     equal o.readWrite, 'foo', "property has value"
 
@@ -37,5 +37,21 @@ test "not enumerating property", ->
     for key, value of o
         ok false, "is enumerable" if key is 'notEnumerable'
 
+test "events", ->
+    expect 3
+
+    e = new Drafty.Object
+
+    e.bind 'test', ->
+        ok true, "triggering without arguments"
+    e.bind 'test', ->
+        ok true, "multiple bindings"
+    
+    e.trigger 'test'
+
+    e.bind 'testWithArgs', (arg) ->
+        equal arg, 'foo', "triggering with arguments"
+    
+    e.trigger 'testWithArgs', 'foo'
 
 
