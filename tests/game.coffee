@@ -11,6 +11,7 @@ test "initialization", ->
 test "rendering with dom", ->
     @game.renderOn "dom"
     ok @game.renderer instanceof Drafty.DomRenderer
+    @game.renderer.wrapper.removeFromDOM()
 
 class DummyRenderer extends Drafty.Renderer
 
