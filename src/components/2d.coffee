@@ -3,7 +3,7 @@ class Drafty["2D"] extends Drafty.Component
     moveBy: (x, y) ->
         @x += x
         @y += y
-        
+    
     resizeTo: (@w, @h) ->
     resizeBy: (w, h) ->
         @w += w

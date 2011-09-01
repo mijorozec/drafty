@@ -10,9 +10,11 @@ class Drafty.Object
             e(args...) for e in @events[event]
             true
         else false
+
+
 # helper for properties
 # use: (in class declaration)
-#     @property 'p', default: 1, access: Derafty.WRITE
+#     @property 'p', default: 1, access: Drafty.WRITE
 Drafty.Object.property = (name, options) ->
     options ?= {}
     options.access ?= Drafty.READ | Drafty.WRITE

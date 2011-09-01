@@ -11,22 +11,21 @@ class Drafty.DomRenderer extends Drafty.Renderer
         @bind()
     
     bind: ->
-        @timer.bind 'tick', _(@render).bind @
-        @game.bind 'createEntity', _(@create).bind @
-        @game.bind 'removeEntity', _(@remove).bind @
+        @timer.bind 'tick', @render
+        @game.bind 'createEntity', @create
+        @game.bind 'removeEntity', @remove
     
-    render: ->
-        _(@entities).each (entity) ->
+    render: =>
+        _(@entities).each (entity) =>
             @update entity if entity.hasChanged()
-        , @
     
     update: (entity) ->
         console.info "Updating entity #{entity.id}"
 
         @nodes[entity.id].update()
         entity.resetChanged()
-        
-    create: (entity) ->
+    
+    create: (entity) =>
         console.info "Creating entity #{entity.id}"
 
         node = new Drafty.DomRenderer.Entity entity
@@ -36,5 +35,5 @@ class Drafty.DomRenderer extends Drafty.Renderer
 
         @wrapper.addEntity node
 
-    remove: (entity) ->
+    remove: (entity) =>
         console.info "Removing entity #{entity.id}"

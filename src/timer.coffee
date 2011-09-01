@@ -1,6 +1,4 @@
-class Drafty.Timer extends Drafty.Object
-    construct: (@tickContext) ->
-    
+class Drafty.Timer extends Drafty.Object    
     start: ->
         throw new Error "Oh! I can't start, I'm not designed for that!"
     
@@ -10,5 +8,5 @@ class Drafty.Timer extends Drafty.Object
     stop: ->
         throw new Error "I don't remember that I even started. How can I stop then?"
 
-    tick: ->
+    tick: =>
         @trigger 'tick'

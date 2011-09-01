@@ -4,12 +4,11 @@ class Drafty.AnimationTimer extends Drafty.Timer
         
         onFrame = @onFrame # can't run this.onFrame...
 
-        step = _( ->
+        step = =>
             return unless @running
 
             @tick()
             onFrame step
-        ).bind @
 
         step()
     

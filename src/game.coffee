@@ -3,17 +3,23 @@ class Drafty.Game extends Drafty.Object
         @timer ||= new Drafty.FixedTimer
         @timer.start()
 
+        @keyboard = new Drafty.Keyboard
+
         @entities = []
     
     renderOn: (name) ->
-        renderer = if name instanceof Drafty.Renderer
-                       name
-                   else switch name
-                       when "dom" then Drafty.DomRenderer
-                     # when "canvas" then Drafty.CanvasRenderer
-                       else throw new Error "Sorry, I can't render on \"#{name}\"."
-        
-        @renderer = new renderer @
+        @renderer = do =>
+            if name instanceof Drafty.Renderer
+                return name
+            if _(name).isString()
+                switch name
+                    when "dom" then return new Drafty.DomRenderer @
+            if _(name).isFunction()
+                renderer = new name @
+                if renderer instanceof Drafty.Renderer
+                    return renderer
+            
+            throw new Error "#{name} is not valid renderer"
     
     entity: (components) ->
         entity = new Drafty.Entity
@@ -25,5 +31,3 @@ class Drafty.Game extends Drafty.Object
         @trigger 'createEntity', entity
         
         entity
-
-                
