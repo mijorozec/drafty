@@ -6,7 +6,7 @@ class Drafty.DomRenderer.Entity extends Drafty.Object
         @set 'position', 'absolute'
     
     update: ->
-        _(@entity.changed).each (change) ->
+        _(@entity.changed).each (change) =>
             if change.component instanceof Drafty["2D"]
                 name = switch change.what
                            when 'x' then 'left'
@@ -17,7 +17,6 @@ class Drafty.DomRenderer.Entity extends Drafty.Object
                 name = 'backgroundColor'
                 
             @set name, change.value if name
-        , @
     
     set: (name, value) ->
         if name in ['width', 'height', 'top', 'left']

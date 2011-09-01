@@ -34,6 +34,8 @@ ticking = ->
     stop()
     @timer.start()
 
+
+
 module "animation_timer",
     setup: ->
         @timer = new Drafty.AnimationTimer
@@ -45,11 +47,12 @@ test "start", ->
 test "ticking & stop", ticking
 
 
+
 module "fixed_timer",
     setup: ->
         @timer = new Drafty.AnimationTimer
 
 test "start", ->
     @timer.start()
-    
+
 test "ticking & stop", ticking

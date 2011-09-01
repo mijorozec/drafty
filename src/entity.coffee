@@ -47,4 +47,3 @@ class Drafty.Entity extends Drafty.Object
     
     resetChanged: ->
         @changed = []
-

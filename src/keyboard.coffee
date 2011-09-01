@@ -9,9 +9,8 @@ class Drafty.Keyboard extends Drafty.Object
         code = e.keyCode
         @pressed.push code unless _(@pressed).include code
         @trigger 'keyDown', e
-        
+    
     keyUp: (e) =>
         code = e.keyCode
         _(@pressed).remove code
         @trigger 'keyUp', e
-        

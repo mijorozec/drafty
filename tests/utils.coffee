@@ -24,5 +24,3 @@ test "remove", ->
 
 test "addEventListener", ->
     ok false, "don't know how to test this..."
-
-

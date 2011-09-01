@@ -35,4 +35,3 @@ class Drafty.DomRenderer.Wrapper extends Drafty.Object
             unbind = window.removeEventListener ||
                      window.detachEvent
             unbind 'load', @_appendToBody, false
-        

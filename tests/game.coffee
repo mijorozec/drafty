@@ -26,6 +26,3 @@ test "rendering with own renderer", ->
 
 test "adding entity", ->
     ok @game.entity []
-
-
-

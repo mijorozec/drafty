@@ -53,5 +53,3 @@ test "events", ->
         equal arg, 'foo', "triggering with arguments"
     
     e.trigger 'testWithArgs', 'foo'
-
-

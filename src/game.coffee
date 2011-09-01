@@ -31,5 +31,3 @@ class Drafty.Game extends Drafty.Object
         @trigger 'createEntity', entity
         
         entity
-
-                

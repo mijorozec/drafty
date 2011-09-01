@@ -24,7 +24,7 @@ class Drafty.DomRenderer extends Drafty.Renderer
 
         @nodes[entity.id].update()
         entity.resetChanged()
-        
+    
     create: (entity) =>
         console.info "Creating entity #{entity.id}"
 
